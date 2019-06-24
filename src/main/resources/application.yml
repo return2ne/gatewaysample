@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: rewritepath_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/get/**
+          filters:
+            - RewritePath=/get/(?<segment>.*), /$\{segment}
+            - GatewaysampleFilterFactory
+
